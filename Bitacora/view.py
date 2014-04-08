@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 *-*
 
 '''
@@ -254,12 +254,12 @@ class vista():
     def cargar_imagenes(self):
         "Metodo para Cargar las Imagenes a la Aplicacion"
         # Cargammos Las Imagenes desde Archivo
-        imagenfondo = "src/images/Fondo.png"
-        imagenform = "src/images/Fondo_Panel.png"
-        imagenuser_interface = "src/images/user_interface.png"
-        imagenbEntrar = "src/images/Entrar.png"
-        imagenbCerrar = "src/images/Cerrar.png"
-        imagenbApagar = "src/images/Apagar.png"
+        imagenfondo = "/opt/BitacoraL/src/images/Fondo.png"
+        imagenform = "/opt/BitacoraL/src/images/Fondo_Panel.png"
+        imagenuser_interface = "/opt/BitacoraL/src/images/user_interface.png"
+        imagenbEntrar = "/opt/BitacoraL/src/images/Entrar.png"
+        imagenbCerrar = "/opt/BitacoraL/src/images/Cerrar.png"
+        imagenbApagar = "/opt/BitacoraL/src/images/Apagar.png"
 
         # Cargamos el fondo y las imagenes para la Ventana Login
         self.fondo = pygame.image.load(imagenfondo).convert()
