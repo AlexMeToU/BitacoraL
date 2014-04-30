@@ -33,7 +33,7 @@ import Clases.filtro
 
 class controlador:
     
-    def __init__(self):
+    def __init__(self,sistemaop):
         # Creamos un objeto usuario para la informacion del usuario a logear
         self.usuario = Clases.usuario.Usuario()
         
@@ -45,6 +45,9 @@ class controlador:
         
         # Instancia a la Clase filtro
         self.filtro = Clases.filtro.filtro()
+        
+        # SO para pruebas en Windows
+        self.sistemaop = sistemaop
         
     """---------------------------------------Metodos-------------------------------------------------------"""
     def Obtener_Hora_Servidor(self):
@@ -92,6 +95,7 @@ class controlador:
                         if len(consulta) > 0:
                             for registro in consulta:
                                 # Guardamos la informacion recibida desde la BD
+                                self.usuario.tipo_usuario = self.tipo_usuarios[key]
                                 self.usuario.nombre = registro [1] #Nombre
                                 self.usuario.apePat = registro [2] #ApePat
                                 self.usuario.apeMat = registro [3] #ApeMat
@@ -109,6 +113,7 @@ class controlador:
                         if len(consulta) > 0:
                             for registro in consulta:
                                 # Guardamos la informacion recibida desde la BD
+                                self.usuario.tipo_usuario = self.tipo_usuarios[key]
                                 self.usuario.nombre = registro [1] #Nombre
                                 self.usuario.apePat = registro [2] #ApePat
                                 self.usuario.apeMat = registro [3] #ApeMat
@@ -126,6 +131,7 @@ class controlador:
                         if len(consulta) > 0:
                             for registro in consulta:
                                 # Guardamos la informacion recibida desde la BD
+                                self.usuario.tipo_usuario = self.tipo_usuarios[key]
                                 self.usuario.nombre = registro [1] #Nombre
                                 self.usuario.apePat = registro [2] #ApePat
                                 self.usuario.apeMat = registro [3] #ApeMat
@@ -135,7 +141,7 @@ class controlador:
                             break
 
             if len(consulta) > 0:
-                self.usuario.Obtener_IP_Equipo()
+                self.usuario.Obtener_IP_Equipo(self.sistemaop)
                 if self.usuario.IP_Equipo == "0.0.0.0":
                     #print "Fallo al Leer IP"
                     return "FAILED_GET_IP"

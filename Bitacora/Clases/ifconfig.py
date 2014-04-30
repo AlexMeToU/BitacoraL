@@ -11,13 +11,15 @@ import re
 import os
 
 class ifconfig():
-    def __init__(self):
+    def __init__(self,sistemaop):
         "Clase para Llamar a ifconfig y obtener IP de Tarjeta de Red"
         #self.interfaz = "eth0"
         self.interfaz = "wlan1"
         self.ip = "0.0.0.0"
-        self.archivo = "/tmp/ifconfig.txt"
-        #self.archivo = "ifconfig.txt"
+        if sistemaop == "Linux2":
+            self.archivo = "/tmp/ifconfig.txt"
+        else:
+            self.archivo = "Clases/ifconfig.txt"
             
     def guardar_ip(self):
         f = self.abrir_archivo(self.archivo, "r")
