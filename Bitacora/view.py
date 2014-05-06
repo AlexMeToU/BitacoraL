@@ -40,6 +40,9 @@ class vista():
         sistemaop = sys.platform
         print sistemaop
         
+        # Numero de Version Para los Modulos Integrados
+        self.version = 1
+        
         # Cargamos todo lo relacionado a pygame
         pygame.init()
         
@@ -49,9 +52,9 @@ class vista():
         self.asist_controlador = Asistencia.controller.controlador()
         
         # Creamos las Instancias a las Vistas
-        self.loginview = Login.LoginView.LoginView(sistemaop)
-        self.userview = InterfazUsuario.UserView.UserView(sistemaop)
-        self.asistview = Asistencia.AttendanceView.AttendanceView(sistemaop)
+        self.loginview = Login.LoginView.LoginView(sistemaop,self.version)
+        self.userview = InterfazUsuario.UserView.UserView(sistemaop,self.version)
+        self.asistview = Asistencia.AttendanceView.AttendanceView(sistemaop,self.version)
         
         # Creamos la Ventana Login
         self.loginview.crear_interfaz()
@@ -111,10 +114,11 @@ class vista():
                     # refresh the display
                     self.userview.refresh_display()
                 else:
-                    self.asistview.surface()
-    
-                    # refresh the display
-                    self.asistview.refresh_display()
+                    if self.version > 1:
+                        self.asistview.surface()
+        
+                        # refresh the display
+                        self.asistview.refresh_display()
 
     def ingresar_sistema(self):
         "Metodo para El Ingreso del Usuario"
@@ -301,7 +305,7 @@ class vista():
                 # Click en Boton Apagar
                 if self.userview.apagar.collidepoint(x, y):
                     self.controlador.ApagarEquipo()
-            if self.userview.asistencia.collidepoint(x, y):
+            if self.userview.asistencia.collidepoint(x, y) and self.version > 1:
                 print "Click en Boton Asistencia"
                 print "Tipo de Usuario: ",self.user_controlador.get_user_type()
                 if self.user_controlador.get_user_type() == "alum":

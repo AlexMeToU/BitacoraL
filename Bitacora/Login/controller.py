@@ -15,6 +15,7 @@ import threading
 import time
 import logging
 from datetime import datetime
+import hashlib
 # -----------
 # Constantes
 # -----------
@@ -75,11 +76,14 @@ class controlador:
         self.usuario.usuario = self.filtro.filtrar_cadena(usuario) 
         self.usuario.pwd = self.filtro.filtrar_cadena(pwd)
         consulta = ""
+        m = hashlib.md5()
+        m.update(self.usuario.pwd)        
         # Se compara el usuario y pwd ingresado con los del Super Usuario
-        if self.usuario.usuario == "super_usuario" and self.usuario.pwd =="COZDSOWLBOXY":
+        #if self.usuario.usuario == "super_usuario" and self.usuario.pwd =="COZDSOWLBOXY":
+        if self.usuario.usuario == "super_usuario" and m.hexdigest() =="f1eabafa36de3c1abcd217b1baae2875":        
             # Si es el Super Usuario asignamos self.super_usuario= 1 y salimos de la Aplicacion
-            logging.info('Se logeo Super')
-            logging.info ("Hora de Inicio = ["+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))+"]")            
+            #logging.info('Se logeo Super')
+            #logging.info ("Hora de Inicio = ["+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))+"]")            
             consulta = None
             return "super"
         else:

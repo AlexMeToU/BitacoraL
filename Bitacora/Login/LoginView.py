@@ -6,7 +6,6 @@ Created on 14/04/2014
 # -----------
 # Librerias
 # -----------
-from ctypes import windll
 import pygame
 from pygame.locals import *
 # -----------
@@ -24,10 +23,13 @@ import Clases.eztext
 # ------------------------------
 
 class LoginView():
-    def __init__(self,sistemaop):
+    def __init__(self,sistemaop,version):
         "Definimos los Atributos de la Clase"
         # Guardamos el SO
         self.sistemaop = sistemaop
+        
+        # Guardamos el Numero de Version del Proyecto
+        self.version = version
         
         # Cargamos todo lo relacionado a pygame
         pygame.init()

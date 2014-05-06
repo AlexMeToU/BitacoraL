@@ -23,10 +23,13 @@ import Clases.eztext
 # ------------------------------
 
 class UserView():
-    def __init__(self,sistemaop):
+    def __init__(self,sistemaop,version):
         "Definimos los Atributos de la Clase"
         # Guardamos el SO
         self.sistemaop = sistemaop
+        
+        # Guardamos el Numero de Version del Proyecto
+        self.version = version
         
         # Cargamos todo lo relacionado a pygame
         pygame.init()
@@ -87,7 +90,7 @@ class UserView():
         self.screen.blit(self.user_interface, (0,0))
         self.screen.blit(self.bsalir, self.bsalir.get_rect(center=(45, 103)))
         # Si el Usuario Logeado es un Alumno se dibuja en la pantalla el boton de Asistencia.
-        if tipo_usuario == "alum":
+        if tipo_usuario == "alum" and self.version > 1:
             self.screen.blit(self.basistencia, self.basistencia.get_rect(center=(425, 40)))
         self.screen.blit(self.bapagar, self.bapagar.get_rect(center=(434, 103)))
         self.usuario_logeado.draw(self.screen)
