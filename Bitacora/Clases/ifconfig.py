@@ -16,7 +16,7 @@ class ifconfig():
         #self.interfaz = "eth0"
         self.interfaz = "wlan1"
         self.ip = "0.0.0.0"
-        if sistemaop == "Linux2":
+        if sistemaop == "linux2":
             self.archivo = "/tmp/ifconfig.txt"
         else:
             self.archivo = "Clases/ifconfig.txt"

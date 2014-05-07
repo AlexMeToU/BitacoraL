@@ -45,7 +45,7 @@ class Usuario():
         ob_ifconfig = ifconfig.ifconfig(sistemaop)
         
         # Creamos el Archivo para obtener la IP del Equipo
-        if sistemaop == "Linux2":
+        if sistemaop == "linux2":
             ob_ifconfig.crear_archivo()
         
         # Obtenemos la IP del Equipo

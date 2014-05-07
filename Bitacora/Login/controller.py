@@ -19,8 +19,7 @@ import hashlib
 # -----------
 # Constantes
 # -----------
-apagarL = "sudo shutdown -h now"
-apagarW = "shutdown /s /f /t 01"
+apagarL = "shutdown -h now"
 # ------------------------------
 # Clases y Funciones utilizadas
 # ------------------------------
