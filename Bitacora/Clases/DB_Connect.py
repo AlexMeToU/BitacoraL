@@ -10,7 +10,9 @@ class DB_Connect:
     def __init__(self, db_host='172.16.15.1',db_port=3306 , db_user='kabl', db_pass='Asist.3',
                  db_name='dbnovauniversitas'):
     #def __init__(self, db_host='127.0.0.1',db_port=3306 , db_user='root', db_pass='',
-                #db_name='kabl'):        
+                 #db_name='kabl'):
+    #def __init__(self, db_host='187.157.139.4',db_port=3306 , db_user='kabl', db_pass='Asist.3',
+                 #db_name='dbnovauniversitas'):      
         self.db_host = db_host
         self.db_port = db_port
         self.db_user = db_user
