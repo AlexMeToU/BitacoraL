@@ -23,13 +23,13 @@ import Clases.eztext
 # ------------------------------
 
 class AttendanceView():
-    def __init__(self,sistemaop,version):
+    def __init__(self,sistemaop,modulo_asistencia):
         "Definimos los Atributos de la Clase"
         # Guardamos el SO
         self.sistemaop = sistemaop
         
-        # Guardamos El numero de Version del Proyecto
-        self.version = version
+        # Guardamos bandera para Habilitar Modulos
+        self.modulo_asistencia = modulo_asistencia
         
         # Cargamos todo lo relacionado a pygame
         pygame.init()
