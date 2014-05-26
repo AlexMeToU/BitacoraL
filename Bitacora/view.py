@@ -37,8 +37,8 @@ class vista():
     def main(self):
         "Metodo Main Principal"
         # Obtenemos el S.O Esto es para pruebas en Windows.
-        sistemaop = sys.platform
-        print sistemaop
+        self.sistemaop = sys.platform
+        print self.sistemaop
         
         # Numero de Version Para los Modulos Integrados
         self.modulo_asistencia = False
@@ -47,21 +47,21 @@ class vista():
         pygame.init()
         
         # Creamos las Instancias a los Controladores
-        self.controlador = Login.controller.controlador(sistemaop)
+        self.controlador = Login.controller.controlador(self.sistemaop)
         self.user_controlador = InterfazUsuario.controller.controlador()
         self.asist_controlador = Asistencia.controller.controlador()
         
         # Creamos las Instancias a las Vistas
-        self.loginview = Login.LoginView.LoginView(sistemaop,self.modulo_asistencia)
-        self.userview = InterfazUsuario.UserView.UserView(sistemaop,self.modulo_asistencia)
-        self.asistview = Asistencia.AttendanceView.AttendanceView(sistemaop,self.modulo_asistencia)
+        self.loginview = Login.LoginView.LoginView(self.sistemaop,self.modulo_asistencia)
+        self.userview = InterfazUsuario.UserView.UserView(self.sistemaop,self.modulo_asistencia)
+        self.asistview = Asistencia.AttendanceView.AttendanceView(self.sistemaop,self.modulo_asistencia)
         
         # Creamos la Ventana Login
         self.loginview.crear_interfaz()
 
         # create the pygame clock
         self.clock = pygame.time.Clock()
-    
+        
     """---------------------------------------Metodos-------------------------------------------------------"""
     
     def iniciar(self):
@@ -95,10 +95,10 @@ class vista():
 
             if band_write == 1:
                 # Se ingresan datos en el TextBox del Usuario
-                self.loginview.usuario.update(events)
+                self.loginview.usuario.update(events,self.sistemaop)
             elif band_write == 2:
                 # Se ingresan datos en el TextBox del Pwd
-                self.loginview.pwd.update(events)
+                self.loginview.pwd.update(events,self.sistemaop)
 
             if band_access == False:
                 # Se muestran los Surfaces de la Ventana Login
