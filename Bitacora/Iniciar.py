@@ -17,7 +17,7 @@ import sys
 # ------------------------------
 # Clases y Funciones utilizadas
 # ------------------------------
-import view
+import Main
 # ------------------------------
 # Funcion principal de la Aplicacion
 # ------------------------------
@@ -31,6 +31,6 @@ if __name__ == "__main__":
     elif sistemaop == "linux2":
         reload(sys)
         print sys.getdefaultencoding()
-    interfaz = view.vista()
-    interfaz.main()
-    interfaz.iniciar()
+    inicio = Main.Main()
+    inicio.main()
+    inicio.iniciar()

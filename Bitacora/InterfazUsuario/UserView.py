@@ -1,4 +1,3 @@
-﻿# -*- coding: utf-8 *-*
 '''
 Created on 14/04/2014
 
@@ -30,7 +29,7 @@ class UserView():
         self.sistemaop = sistemaop
         
         # Guardamos bandera para Habilitar Modulos
-        self.modulo_asistencia = modulo_asistencia        
+        self.modulo_asistencia = modulo_asistencia
         
         # Cargamos todo lo relacionado a pygame
         pygame.init()
@@ -95,5 +94,4 @@ class UserView():
             self.screen.blit(self.basistencia, self.basistencia.get_rect(center=(425, 40)))
         self.screen.blit(self.bapagar, self.bapagar.get_rect(center=(434, 103)))
         self.usuario_logeado.draw(self.screen)
-        self.mensaje.draw(self.screen)        
-        
+        self.mensaje.draw(self.screen)       

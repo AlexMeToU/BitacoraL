@@ -7,20 +7,18 @@ Created on 14/02/2014
 # -----------
 # Librerias
 # -----------
-import socket
 # -----------
 # Constantes
 # -----------
 # ------------------------------
 # Clases y Funciones utilizadas
 # ------------------------------
-import ifconfig
-
 
 class Usuario():
     
     def __init__(self):
         "Los atributos del Usuario"
+        self.tipo_usuario=''
         self.graAca = ''
         self.usuario = ''
         self.pwd = ''
@@ -37,30 +35,57 @@ class Usuario():
         # Elementos para Registrar la Asistencia
         self.gpo = ''
         self.materia = ''
-        self.hora_materia = ''        
+        self.hora_materia = ''
         self.clvHor= ''
-        
-    def Obtener_IP_Equipo (self,sistemaop):
-        "Se Obtiene la IP del Equipo por medio de ifconfig"
-        # Creamos la instancia a la Clase ifconfig
-        ob_ifconfig = ifconfig.ifconfig(sistemaop)
-        
-        # Creamos el Archivo para obtener la IP del Equipo
-        if sistemaop == "linux2":
-            ob_ifconfig.crear_archivo()
-        
-        # Obtenemos la IP del Equipo
-        ob_ifconfig.guardar_ip()
-        self.IP_Equipo = ob_ifconfig.get_IP()
 
-    def obtener_usuario(self):
+    def set_IP(self,ip):
+        "Se Guarda la IP del Equipo"
+        self.IP_Equipo = ip
+        
+    def set_hora_inicio(self,hora):
+        self.hora_inicio = hora
+        
+    def set_hora_final(self,hora):
+        self.hora_salida = hora
+        
+    def get_nombre_usuario(self):
         return self.nombre_usuario
-
-    def obtener_tipo_usuario(self):
+    
+    def get_tipo_usuario(self):
         return self.tipo_usuario
-
+    
+    def get_gpo(self):
+        return self.gpo
+    
+    def get_clvUsu(self):
+        return self.clvUsu
+    
+    def get_clvHor(self):
+        return self.clvHor
+    
+    def get_IP(self):
+        return self.IP_Equipo
+    
+    def guardar_datos(self,tipo_usuario,nombre,apePat,apeMat,graAca,clvUsu,nombre_usuario):
+        "Metodo para Guardar los Datos del Usuario Logeado"
+        self.tipo_usuario = tipo_usuario
+        self.nombre = nombre
+        self.apePat = apePat
+        self.apeMat = apeMat
+        self.graAca = graAca
+        self.clvUsu = clvUsu
+        self.nombre_usuario = nombre_usuario
+        
+    def guardar_datos_clase(self,gpo,materia,hora_materia,clvHor):
+        "Metodo para Guardar los Datos de la Clase"
+        self.gpo = gpo
+        self.materia = materia
+        self.hora_materia = hora_materia
+        self.clvHor= clvHor
+        
     def reset_usuario(self):
         "Metodo que resetea los Atributos del Usuario"
+        self.tipo_usuario=''        
         self.graAca = ''
         self.usuario = ''
         self.pwd = ''
@@ -74,5 +99,5 @@ class Usuario():
         self.IP_Equipo='0.0.0.0'
         self.gpo = ''
         self.materia = ''
-        self.hora_materia = ''        
+        self.hora_materia = ''
         self.clvHor= ''

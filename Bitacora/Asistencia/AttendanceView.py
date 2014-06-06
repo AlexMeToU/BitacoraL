@@ -1,4 +1,3 @@
-﻿# -*- coding: utf-8 *-*
 '''
 Created on 21/04/2014
 
@@ -24,19 +23,20 @@ import Clases.eztext
 # ------------------------------
 
 class AttendanceView():
-    def __init__(self,sistemaop,modulo_asistencia):
+    def __init__(self,sistemaop,usuario):
         "Definimos los Atributos de la Clase"
+        # Guardamos la instancia del objeto Usuario
+        self.usuario = usuario
+        
         # Guardamos el SO
         self.sistemaop = sistemaop
-        
-        # Guardamos bandera para Habilitar Modulos
-        self.modulo_asistencia = modulo_asistencia
         
         # Cargamos todo lo relacionado a pygame
         pygame.init()
         
         # Cargamos el Tipo de Fuente a Usar
         self.fuente = pygame.font.SysFont("Arial", 14, bold=True, italic=False)
+
         
     def crear_interfaz(self):
         self.dimencionar_ventana()
@@ -65,10 +65,10 @@ class AttendanceView():
         # Cargamos Item para los Mensajes al Usuario
         self.usuario_logeado = Clases.eztext.Input(x=25, y=45, font = self.fuente, maxlength=20, color=(109,110,113), prompt='')
         self.tmp = Clases.eztext.Input(x=20, y=70, font = self.fuente, maxlength=20, color=(109,110,113), prompt='Clase: ')
-        self.clase = Clases.eztext.Input(x=25, y=90, font = self.fuente, maxlength=50, color=(109,110,113), prompt='NOMBRE DE LA CLASE DEL ALUMNO A ESA HORA')
-        self.mensaje = Clases.eztext.Input(x=130, y=110, font = self.fuente, maxlength=50, color=(255,0,0), prompt='POSIBLE MENSAJE AL USUARIO REGISTRO O NO REGISTRO ASISTENCIA')
+        self.clase = Clases.eztext.Input(x=25, y=90, font = self.fuente, maxlength=50, color=(109,110,113), prompt='')
         self.tmp2 = Clases.eztext.Input(x=20, y=110, font = self.fuente, maxlength=20, color=(109,110,113), prompt='Asistencia: ')
-        self.edo_asist = Clases.eztext.Input(x=25, y=130, font = self.fuente, maxlength=50, color=(109,110,113), prompt='HORA A LA QUE SE REGISTRO EL ALUMNO')
+        self.edo_asist = Clases.eztext.Input(x=25, y=130, font = self.fuente, maxlength=50, color=(109,110,113), prompt='')
+        self.mensaje = Clases.eztext.Input(x=150, y=110, font = self.fuente, maxlength=50, color=(255,0,0), prompt='')
 
     def cargar_botones(self):
         "Metodo para cargar Botones a la Interfaz"

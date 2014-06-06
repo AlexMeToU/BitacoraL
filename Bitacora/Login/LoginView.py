@@ -1,4 +1,3 @@
-﻿# -*- coding: utf-8 *-*
 '''
 Created on 14/04/2014
 
@@ -7,6 +6,7 @@ Created on 14/04/2014
 # -----------
 # Librerias
 # -----------
+from ctypes import windll
 import pygame
 from pygame.locals import *
 # -----------
@@ -24,20 +24,20 @@ import Clases.eztext
 # ------------------------------
 
 class LoginView():
-    def __init__(self,sistemaop,modulo_asistencia):
+    def __init__(self,sistemaop,usuario):
         "Definimos los Atributos de la Clase"
         # Guardamos el SO
         self.sistemaop = sistemaop
         
-        # Guardamos bandera para Habilitar Modulos
-        self.modulo_asistencia = modulo_asistencia
+        # Set up a variable that calls the "SetWindowPos" in user32
+        self.SetWindowPos = windll.user32.SetWindowPos
         
         # Cargamos todo lo relacionado a pygame
         pygame.init()
         
         # Cargamos el Tipo de Fuente a Usar
         self.fuente = pygame.font.SysFont("Arial", 14, bold=True, italic=False)
-
+        
     def crear_interfaz(self):
         self.dimencionar_ventana()
         self.cargar_imagenes()
@@ -57,6 +57,7 @@ class LoginView():
             imagenform = "C:/Program Files/Bitacora/src/images/Fondo_Panel.png"
             imagenbEntrar = "C:/Program Files/Bitacora/src/images/Entrar.png"
             imagenbApagar = "C:/Program Files/Bitacora/src/images/Apagar.png"
+
             
         self.fondo = pygame.image.load(imagenfondo).convert()
         self.form = pygame.image.load(imagenform).convert_alpha()
@@ -97,4 +98,8 @@ class LoginView():
         self.usuario.draw(self.screen)
         self.pwd.draw_pwd(self.screen)
         self.mensaje.draw(self.screen)
-        
+
+    def reset_inputs(self):
+        "Metodo para Restear los Inputs de la Vista"
+        self.usuario.reset_input()
+        self.pwd.reset_input()
