@@ -6,7 +6,6 @@ Created on 14/04/2014
 # -----------
 # Librerias
 # -----------
-from ctypes import windll
 import pygame
 from pygame.locals import *
 # -----------
@@ -28,9 +27,6 @@ class LoginView():
         "Definimos los Atributos de la Clase"
         # Guardamos el SO
         self.sistemaop = sistemaop
-        
-        # Set up a variable that calls the "SetWindowPos" in user32
-        self.SetWindowPos = windll.user32.SetWindowPos
         
         # Cargamos todo lo relacionado a pygame
         pygame.init()
