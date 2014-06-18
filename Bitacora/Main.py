@@ -21,6 +21,7 @@ sys.path.append("..")
 # Clases y Funciones utilizadas
 # ------------------------------
 import Clases.usuario
+import Clases.modulos
 import Login.controller
 import InterfazUsuario.controller
 import Asistencia.controller
@@ -39,12 +40,12 @@ class Main():
         print self.sistemaop
 
         # Creamos una instancia al Objeto Usuario
-        self.usuario = Clases.usuario.Usuario()
+        self.usuario = Clases.usuario.Usuario(self.sistemaop)
         
         # Modulos Integrados
-        self.modulo_asistencia = True
-        self.modulo_config = True
-        
+        self.modulo = Clases.modulos.Modulo(self.sistemaop)
+        self.modulo_asistencia = self.modulo.leer_datos("[asistencia]")
+
         # Cargamos todo lo relacionado a pygame
         pygame.init()
         
@@ -71,7 +72,6 @@ class Main():
             self.clock.tick(30)
                                     
             if edo_aplicacion == "Login":
-                print "Modulo de Login"
                 # Creamos la Ventana Login
                 self.login_controlador.crear_interfaz()
                 
@@ -82,17 +82,14 @@ class Main():
                 edo_aplicacion = self.login_controlador.eventos_loginview()
 
             elif edo_aplicacion == "Usuario":
-                print "Modulo de los Usuarios"
                 self.user_controlador.crear_interfaz()                
                 edo_aplicacion = self.user_controlador.eventos_userview()
                 
-            elif edo_aplicacion == "Asistencia" and self.modulo_asistencia == True:
-                print "Modulo para Registro de las Asistencia"
+            elif edo_aplicacion == "Asistencia" and self.modulo_asistencia == "True":
                 self.asist_controlador.crear_interfaz()
                 edo_aplicacion = self.asist_controlador.eventos_asistview()
                 
-            elif edo_aplicacion == "Config" and self.modulo_config == True:
-                print "Modulo para Configuraciones"
+            elif edo_aplicacion == "Config":
                 self.config_controlador.crear_interfaz()
                 edo_aplicacion = self.config_controlador.eventos_config()
     
