@@ -60,8 +60,6 @@ class controlador:
         self.encriptador.actualizar_lista_tags(self.tags_db)
         
         d = self.encriptador.leer_datos()
-        for data in d:
-            print "Datos:",data
         
         # Instancia para el Modelo
         self.modelo = model.modelo(d)
@@ -99,7 +97,7 @@ class controlador:
         # Obtenemos la IP del Equipo
         ob_ifconfig.guardar_ip()
         ip = ob_ifconfig.get_IP()
-        if ip == "":
+        if ip == "0.0.0.0":
             return "FALIED_GET_IP"
         else:
             self.usuario.set_IP(ip)
@@ -188,8 +186,8 @@ class controlador:
             self.encriptador.actualizar_nombre_archivo(self.archivo)
             self.encriptador.actualizar_lista_tags(self.tags_super)
             d = self.encriptador.leer_datos()
-            
-            if self.usuario.usuario == d[0] and self.usuario.pwd == d[1]:
+            acceso_root = self.usuario.get_user_unix()
+            if self.usuario.usuario == d[0] and self.usuario.pwd == d[1] and acceso_root == True:
                 return "Config"
             else:
                 # Buscamos en Cada Tipo de Usuario los Datos Ingresados
