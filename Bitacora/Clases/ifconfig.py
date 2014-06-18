@@ -9,12 +9,36 @@ Created on 27/03/2014
 # -----------
 import re
 import os
+# -----------
+# Constantes
+# -----------
+# ------------------------------
+# Clases y Funciones utilizadas
+# ------------------------------
+import encriptador
+# ------------------------------
+# Funcion principal del Programa
+""" Controlador de la Interfaz de la Tarjeta de Red"""
+# ------------------------------
 
 class ifconfig():
     def __init__(self,sistemaop):
         "Clase para Llamar a ifconfig y obtener IP de Tarjeta de Red"
-        #self.interfaz = "eth0"
-        self.interfaz = "wlan1"
+
+        if sistemaop == "linux2":
+            archivo = "/opt/BitacoraL/src/files/profile4"
+        else:
+            archivo = "C:/Program Files/Bitacora/src/files/profile4"
+
+        # Configuracion del Objeto a la Instancia de la Clase
+        self.lista_tags = ["[Interface]"]
+
+        # Instancia para el Encriptador
+        self.encriptador = encriptador.Encriptador(sistemaop,self.lista_tags,archivo)        
+        # Guardamos La interfaz de Red 
+        tmp = self.encriptador.leer_datos()
+        self.interfaz = tmp[0]
+        
         self.ip = "0.0.0.0"
         if sistemaop == "linux2":
             self.archivo = "/tmp/ifconfig.txt"
@@ -33,14 +57,18 @@ class ifconfig():
                 while linea!="":
                     if linea.find(self.interfaz) >= 0:
                         # Habilitamos Bandera de haber encontrado el Dispositivo de Red
-                        find_interfaz = 1
-                    if find_interfaz >0 and linea.find("inet:") >=0: 
-                        # Buscamos la IP v4 de la Interfaz de Red
-                        tmp = re.search('inet:(\d+\.\d+.\d+.\d+)', linea)
-                        if tmp:
-                            tmp2 = tmp.group()
-                            self.ip = tmp2[tmp2.find(':')+1:]                         
-                            break
+                        linea = f.readline()
+                        if linea.find("inet:") >=0: 
+                            tmp = re.search('inet:(\d+\.\d+.\d+.\d+)', linea)
+                            if tmp:
+                                tmp2 = tmp.group()
+                                self.ip = tmp2[tmp2.find(':')+1:]
+                                break
+                        else:
+                            print "No Encontramos Inet Buscamos mas adelante"
+                            linea = f.readline()
+                    else:
+                        linea = f.readline()
                     linea = f.readline()
                     #os.system(" rm /tmp/ifconfig.txt")
             except (Exception), e:
