@@ -7,6 +7,7 @@ Created on 14/02/2014
 # -----------
 # Librerias
 # -----------
+import os
 # -----------
 # Constantes
 # -----------
@@ -16,7 +17,7 @@ Created on 14/02/2014
 
 class Usuario():
     
-    def __init__(self):
+    def __init__(self,sistemaop):
         "Los atributos del Usuario"
         self.tipo_usuario=''
         self.graAca = ''
@@ -37,6 +38,40 @@ class Usuario():
         self.materia = ''
         self.hora_materia = ''
         self.clvHor= ''
+        
+        self.sistemaop = sistemaop
+        
+        # Archivo
+        if self.sistemaop == "linux2":
+            self.file = "/tmp/user_unix.txt"
+        else:
+            self.file = "Clases/user_unix.txt"
+        
+        # Apuntador a Archivo
+        self.f = None
+        
+    def get_user_unix(self):
+        "Obtenemos el Usuario de Unix"
+        if self.sistemaop == "linux2":
+            os.system("clear")
+            os.system("whoami > /tmp/user_unix.txt")
+        
+        self.abrir_archivo("r")
+        linea = self.f.readline()
+        access = False
+        if linea == "root\n":
+            access = True
+        else:
+            access = False
+        return access
+        
+    def abrir_archivo(self,modo):
+        "Metodo para Abrir Archivo"
+        try:
+            self.f = open(self.file,modo)
+        except Exception:
+            print "No se Abrio Archivo"
+            self.f = None
 
     def set_IP(self,ip):
         "Se Guarda la IP del Equipo"
@@ -53,6 +88,9 @@ class Usuario():
     
     def get_tipo_usuario(self):
         return self.tipo_usuario
+
+    def set_gpo(self,gpo):
+        self.gpo = gpo
     
     def get_gpo(self):
         return self.gpo
