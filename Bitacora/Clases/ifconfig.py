@@ -58,8 +58,8 @@ class ifconfig():
                     if linea.find(self.interfaz) >= 0:
                         # Habilitamos Bandera de haber encontrado el Dispositivo de Red
                         linea = f.readline()
-                        if linea.find("inet:") >=0: 
-                            tmp = re.search('inet:(\d+\.\d+.\d+.\d+)', linea)
+                        if linea.find("inet") >=0: 
+                            tmp = re.search(' addr:(\d+\.\d+.\d+.\d+)', linea)
                             if tmp:
                                 tmp2 = tmp.group()
                                 self.ip = tmp2[tmp2.find(':')+1:]
@@ -67,10 +67,7 @@ class ifconfig():
                         else:
                             print "No Encontramos Inet Buscamos mas adelante"
                             linea = f.readline()
-                    else:
-                        linea = f.readline()
                     linea = f.readline()
-                    #os.system(" rm /tmp/ifconfig.txt")
             except (Exception), e:
                 print "****Error al leer Archivo ifconfig.txt"
                 print "Tipo de Error:"
